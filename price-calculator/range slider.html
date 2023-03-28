@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Dynamic Pricing Slider</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <style type="text/css">
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 300px;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider-values {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  font-size: 14px;
+}
+
+.slider-values span {
+  width: calc(100% / 6);
+  text-align: center;
+  opacity: 0; /* start with all values at 50% opacity */
+}
+
+.slider-values span.active {
+  opacity: 1; /* selected value at 100% opacity */
+  font-weight: bold;
+}
+
+.savings-container {
+  margin-top: 20px;
+}
+
+.savings-container p {
+  font-size: 18px;
+}
+
+.savings-container span {
+  font-weight: bold;
+}
+
+
+
+    </style>
+  </head>
+  <body>
+    
+ <div class="slider-container">
+  <label for="slider">Annual SaaS Spend:</label>
+  <input type="range" min="0" max="6" value="0" class="slider" id="slider">
+  <div class="slider-values">
+    <span>$0M</span>
+    <span>$500K</span>
+    <span>$1M</span>
+    <span>$2M</span>
+    <span>$3M</span>
+    <span>$4M</span>
+    <span>$5M</span>
+  </div>
+  <div class="savings-container">
+    <p>Potential Savings: <span id="savings">$150,000</span></p>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+const slider = document.getElementById('slider');
+const sliderValues = document.querySelectorAll('.slider-values span');
+const savings = document.getElementById('savings');
+
+const prices = ['$0M', '$500K', '$1M', '$2M', '$3M', '$4M', '$5M'];
+const savingsAmounts = ['$0', '$150,000', '$300,000', '$600,000', '$900,000', '$1,200,000', '$1,500,000'];
+
+slider.oninput = function() {
+  const value = slider.value;
+  sliderValues.forEach((span, index) => {
+    span.classList.toggle('active', index == value);
+  });
+  savings.innerText = savingsAmounts[value];
+};
+
+</script>
+  </body>
+</html>
